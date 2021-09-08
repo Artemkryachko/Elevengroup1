@@ -33,8 +33,14 @@ last_index_graph_min, last_value_graph_min, last_index_rasschet_min, last_value_
 last_index_graph_max, last_value_graph_max, last_index_rasschet_max, last_value_rasschet_max = last_max_rasschet(index_first_max,spisok,step,value_first_max,ostatok,koef,first_rasschet_max)
 
 # / / /   Временный луч
+luch_min = last_index_rasschet_min
+last_index_rasschet_min = len(spisok) + 20
+last_value_rasschet_min = raschetmin(last_value_rasschet_min, koef, len(spisok) - luch_min + 20, ostatok)
 
-# / / /
+luch_max = last_index_rasschet_max
+last_index_rasschet_max = len(spisok) + 20
+last_value_rasschet_max = raschetmax(last_value_rasschet_max, koef, len(spisok) - luch_max + 20, ostatok)
+
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 print("Задание 3")
