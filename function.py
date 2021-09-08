@@ -122,6 +122,80 @@ def parallelup(lst,last_index_graph_min,Max_y,koef,ostatok): #подается: 
                 B_x = len(lst) - 1
                 A_y = raschetmax(q,koef,t,ostatok)
                 B_y = raschetmin(q,koef,len(find_max)-t-1,ostatok)
+                return A_x,A_y,B_x,B_y,t,q
+            if(exitFlag):
+                 break
+    return A_x,A_y,B_x,B_y,t,q
+def paralleldown(lst,last_index_graph_max,Max_y,koef,ostatok):
+    c = []
+    for i in range(0,2000,1):
+        c.append(i+0.1)
+        c.append(i+0.2)
+        c.append(i+0.3)
+        c.append(i+0.4)
+        c.append(i+0.5)
+        c.append(i+0.6)
+        c.append(i+0.7)
+        c.append(i+0.8)
+        c.append(i+0.9)
+        c.append(i+1)
+    q = 3
+    t = 4
+    exitFlag = False
+    minimumy = [min(i) for i in lst]
+    A_x = last_index_graph_max
+    B_x = len(lst)+1
+    A_y = minimumy[len(minimumy)-1]
+    B_y = raschetmax(A_y,koef,2,ostatok)
+    find_min = minimumy[last_index_graph_max:len(lst)]
+    b = len(find_min) # (35, 7), (36, 9), (37, 15), (38, 11), (39, 15)
+    B__y = raschetmax(0,koef,len(find_min),ostatok) # находим точку рассчета. от значения 18, c шагом 5
+    for i in c: # от 0 до 18, с шагом 1
+        B__y = raschetmax(i,koef,len(find_min),ostatok)
+        k=-1
+        if(exitFlag):
+                 break
+        for j in range(len(find_min)-1,0,-1):# от 35, до 39
+            k+=1
+            if find_min[j]<=raschetmin(B__y,koef,k,ostatok):
+                q = find_min[j]
+                t = j
+                exitFlag = True
+                A_x = len(lst)- len(find_min)
+                B_x = len(lst) - 1
+                A_y = raschetmin(q, koef,t,ostatok)
+                B_y= raschetmax(q,koef,len(find_min)-t-1, ostatok)
+                return A_x,A_y,B_x,B_y,t,q,b,len(find_min)
+            if(exitFlag):
+                 break
+    return A_x,A_y,B_x,B_y,t,q
+
+def parallelup(lst,last_index_graph_min,Max_y,koef,ostatok): #подается: список, индекс максимума, индекс минимум, значение максимума, кф, кол-во зн после запятой
+    q = 2
+    t = 3
+    exitFlag = False
+    maximumy = [max(i) for i in lst]
+    A_x = last_index_graph_min
+    B_x = len(lst)+1
+    A_y = maximumy[len(maximumy)-1]
+    B_y = raschetmin(A_y,koef,2,ostatok)
+    find_max = maximumy[last_index_graph_min:len(lst)]
+    B__y = raschetmin(Max_y,koef,len(find_max),ostatok) # находим точку рассчета. от значения 18, c шагом 5
+    for i in range(Max_y,0,-1): # от 18, с шагом -1
+        B__y = raschetmin(i,koef,len(find_max),ostatok)
+        k=-1
+        if(exitFlag):
+                 break
+        for j in range(len(find_max)-1,0,-1):# от 35, до 39
+            k+=1
+            if find_max[j]>=raschetmax(B__y,koef,k,ostatok):
+                q = find_max[j]
+                t = j
+                exitFlag = True
+                A_x = len(lst)- len(find_max)
+                B_x = len(lst) - 1
+                A_y = raschetmax(q,koef,t,ostatok)
+                B_y = raschetmin(q,koef,len(find_max)-t-1,ostatok)
                 return A_x,A_y,B_x,B_y,q,t
             if(exitFlag):
                  break
