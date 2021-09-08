@@ -109,10 +109,12 @@ def parallelup(lst,last_index_graph_min,Max_y,koef,ostatok): #подается: 
     B__y = raschetmin(Max_y,koef,len(find_max),ostatok) # находим точку рассчета. от значения 18, c шагом 5
     for i in range(Max_y,0,-1): # от 18, с шагом -1
         B__y = raschetmin(i,koef,len(find_max),ostatok)
+        k=-1
         if(exitFlag):
                  break
         for j in range(len(find_max)-1,0,-1):# от 35, до 39
-            if find_max[j]>=raschetmax(B__y,koef,len(find_max)-j-1,ostatok):
+            k+=1
+            if find_max[j]>=raschetmax(B__y,koef,k,ostatok):
                 q = find_max[j]
                 t = j
                 exitFlag = True
@@ -137,10 +139,12 @@ def paralleldown(lst,last_index_graph_max,Max_y,koef,ostatok):
     B__y = raschetmax(0,koef,len(find_min),ostatok) # находим точку рассчета. от значения 18, c шагом 5
     for i in range(0,Max_y,1): # от 0 до 18, с шагом 1
         B__y = raschetmax(i,koef,len(find_min),ostatok)
+        k=-1
         if(exitFlag):
                  break
         for j in range(len(find_min)-1,0,-1):# от 35, до 39
-            if find_min[j]<=raschetmax(B__y,koef,len(find_min)-j-1,ostatok):
+            k+=1
+            if find_min[j]<=raschetmax(B__y,koef,k,ostatok):
                 q = find_min[j]
                 t = j
                 exitFlag = True
